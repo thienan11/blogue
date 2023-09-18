@@ -1,0 +1,50 @@
+body {
+  color: #222;
+  /* font-family: Quicksand; */
+}
+
+img {
+  max-width: 100%;
+}
+
+main {
+  padding: 15px;
+  /* center posts */
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+header {
+  margin-top: 15px;
+  display: flex; /* make logo and nav bar item next to each other */
+  justify-content: space-between;
+  margin-bottom: 50px; /* put space between header and content below*/
+  align-items: center;
+}
+
+header a {
+  text-decoration: none;
+  color: inherit;
+}
+
+header a.logo{
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+header nav {
+  display: flex;
+  gap: 15px;
+}
+
+div.post{
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+div.post div.texts h2 {
+  margin: 0;
+  font-size: 1.7rem;
+}
