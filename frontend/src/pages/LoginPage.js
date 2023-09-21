@@ -2,6 +2,13 @@ import React, { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function LoginPage() {
+  // <form action="">
+  //   <input type="text" placeholder="username"/>
+  //   <input type="password" placeholder="password"/>
+  //   <button>Login</button>
+  //   <p>Don't have an account? <Link to="/register">Sign up</Link> </p>
+  // </form>
+
   // State to manage password input type
   const [passwordType, setPasswordType] = useState("password");
   const passwordRef = useRef(null);
