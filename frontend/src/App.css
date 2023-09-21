@@ -1,8 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
+:root {
+  font-family: Quicksand;
+  overflow: auto;
+  scrollbar-gutter: stable;
+}
 body {
   color: #5D8AA8;
-  font-family: sans-serif;
+  /* overflow-y: scroll; */
 }
 
 /* ::-webkit-scrollbar { 
@@ -164,4 +170,61 @@ div.post p.summary {
 
 .button-4:-webkit-details-marker {
   display: none;
+}
+
+div.container form i {
+  margin-left: -30px;
+  cursor: pointer;
+  color: #111;
+}
+
+div.container {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: 10px auto;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+div.container h1{
+  padding: 5px 0;
+  font-size: 1.2rem;
+  color: #111;
+  text-align: center;
+}
+
+div.container input {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  outline: none;
+  width: 100%;
+  border: solid 1px #ccc;
+  box-sizing: border-box;
+}
+
+div.container label {
+  color: #111;
+}
+
+div.container button {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 3%;
+  background: #5D8AA8;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+div.container p.tag {
+  color: #111;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-size: .9rem;
 }
