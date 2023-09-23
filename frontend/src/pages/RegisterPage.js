@@ -2,12 +2,6 @@ import React, { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function RegisterPage() {
-  // <form action="">
-  //   <input type="text" placeholder="username"/>
-  //   <input type="password" placeholder="password"/>
-  //   <button>Register</button>
-  //   <p>Already have an account? <Link to="/login">Log in</Link> </p>
-  // </form>
 
   // State to manage password input type
   const [passwordType, setPasswordType] = useState("password");
@@ -25,12 +19,6 @@ export default function RegisterPage() {
 
     togglePassword.addEventListener("click", togglePasswordVisibility);
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      // Add your login logic here
-      // You can access the username and password values using
-      // usernameRef.current.value and passwordRef.current.value
-    });
 
     // Clean up event listeners on unmount
     return () => {
@@ -41,20 +29,32 @@ export default function RegisterPage() {
     };
   }, []);
 
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('')
+
+  async function register(ev) {
+    ev.preventDefault();
+    await fetch('http://localhost:4000/register', {
+      method: 'POST',
+      body: JSON.stringify({username, password}),
+      headers: {'Content-Type':'application/json'},
+    })
+  }
+
   return (
     <div className="container">
       <h1>Sign up</h1>
-      <form method="post">
+      <form onSubmit={register}>
         <p>
           <label htmlFor="username">Username:</label>
-          <input type="text" name="username" id="username" autocomplete="off"/>
+          <input type="text" name="username" id="username" autoComplete="off" value={username} onChange={ev => setUsername(ev.target.value)}/>
         </p>
         <p>
           <label htmlFor="password">Password:</label>
-          <input type={passwordType} name="password" id="password" ref={passwordRef} autocomplete="off"/>
+          <input type={passwordType} name="password" id="password" ref={passwordRef} autoComplete="off" value={password} onChange={ev => setPassword(ev.target.value)}/>
           <i className={`bi ${passwordType === "password" ? "bi-eye-slash" : "bi-eye"}`} id="togglePassword"></i>
         </p>
-        <button type="submit" id="submit" className="submit">
+        <button className="submit">
           Sign up
         </button>
         <p className="tag">

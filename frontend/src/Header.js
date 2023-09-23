@@ -13,15 +13,15 @@ const Header = () => {
           <Profile/>
           <LoginButton/>
           <LogoutButton/>
+          {/* <Link className="button-4" to="/login"><LoginButton/></Link> */}
+          {/* <Link className="button-4">Register</Link> */}
         </nav>
       </div>
-
       {/* <Link to="/" className="logo">Bloguetown</Link>
       <nav>
         <Link className="button-4" to="/login">Login</Link>
         <Link className="button-4">Register</Link>
       </nav> */}
-
     </header>
   );
 }

@@ -5,14 +5,14 @@ const Profile = () => {
 
   return (
     isAuthenticated && (
-      <article>
-        {user?.picture && <img source={user.picture} />}
+      <div className="profile">
+        {user?.picture && <img src={user.picture} alt={user?.name} className="profile_img" />}
         {/* <h2>{user?.name}</h2> */}
         {/* <ul>
           {Object.keys(user).map((objKey, i) => <li key={i}>{objKey}: {user[objKey]
           } </li>)}
         </ul> */}
-      </article>
+      </div>
     )
   )
   

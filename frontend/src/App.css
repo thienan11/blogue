@@ -19,6 +19,10 @@ img {
   max-width: 100%;
 }
 
+a {
+  text-decoration: none;
+}
+
 main {
   padding: 15px;
   max-width: 700px;
@@ -63,6 +67,7 @@ header a.logo{
 header nav {
   display: flex;
   gap: 15px;
+  align-items: center;
 }
 
 div.post {
@@ -113,6 +118,12 @@ div.post p.summary {
   color: black;
 }
 
+img.profile_img {
+  border-radius: 50%;
+  max-width: 32%;  
+  height: auto;
+  float: right;
+}
 
 /* BUTTON STYLING */
 .button-4 {
@@ -178,6 +189,8 @@ div.container form i {
   color: #111;
 }
 
+
+/* LOGIN + REGISTER */
 div.container {
   background-color: #fff;
   border-radius: 5px;
