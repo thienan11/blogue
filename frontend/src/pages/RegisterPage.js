@@ -43,13 +43,28 @@ export default function RegisterPage() {
     return emailRegex.test(email);
   };
 
-  // Function to handle email input change
-  const handleEmailChange = (ev) => {
-    const newEmail = ev.target.value;
-    setEmail(newEmail);
-    setEmailValid(validateEmail(newEmail));
-    updateFormValidity();
-  };
+  // // Function to handle email input change
+  // const handleEmailChange = (ev) => {
+  //   const newEmail = ev.target.value;
+  //   setEmail(newEmail);
+  //   setEmailValid(validateEmail(newEmail));
+  //   updateFormValidity();
+  // };
+  // Function to handle input field changes
+const handleInputChange = (ev) => {
+  const { name, value } = ev.target;
+  // Update the corresponding state variable
+  if (name === "username") {
+    setUsername(value);
+  } else if (name === "email") {
+    setEmail(value);
+    setEmailValid(validateEmail(value));
+  } else if (name === "password") {
+    setPassword(value);
+  }
+  // Update the form's overall validity
+  updateFormValidity();
+};
 
   // Function to update the form's overall validity
   const updateFormValidity = () => {
@@ -68,11 +83,16 @@ export default function RegisterPage() {
       return;
     }
 
-    await fetch("http://localhost:4000/register", {
+    const response = await fetch("http://localhost:4000/register", {
       method: "POST",
       body: JSON.stringify({ username, email, password }),
       headers: { "Content-Type": "application/json" },
     });
+    if (response.status === 200) {
+      alert('Registration Successful!');
+    } else {
+      alert('Failed to register. Try again');
+    }
   }
 
   return (
@@ -86,8 +106,9 @@ export default function RegisterPage() {
             id="username"
             autoComplete="off"
             value={username}
-            onChange={(ev) => setUsername(ev.target.value)}
+            // onChange={(ev) => setUsername(ev.target.value)}
             placeholder="Username"
+            onChange={handleInputChange}
           />
         </p>
         <p>
@@ -97,7 +118,7 @@ export default function RegisterPage() {
             id="email"
             autoComplete="off"
             value={email}
-            onChange={handleEmailChange}
+            onChange={handleInputChange}
             className={!isEmailValid ? "invalid" : ""}
             placeholder="Email"
           />
@@ -113,7 +134,8 @@ export default function RegisterPage() {
             ref={passwordRef}
             autoComplete="off"
             value={password}
-            onChange={(ev) => setPassword(ev.target.value)}
+            // onChange={(ev) => setPassword(ev.target.value)}
+            onChange={handleInputChange}
             placeholder="Password"
           />
           <i
