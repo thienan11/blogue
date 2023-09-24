@@ -123,7 +123,7 @@ const handleInputChange = (ev) => {
             placeholder="Email"
           />
           {!isEmailValid && (
-            <span className="error">Invalid email address format</span>
+            <span className="error">Invalid email address</span>
           )}
         </p>
         <p>

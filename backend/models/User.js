@@ -14,14 +14,6 @@ const UserSchema = new Schema({
       },
       message: 'Invalid email address format.',
     },
-    validate: {
-      validator: async function (email) {
-        // Ensure email is unique
-        const user = await UserModel.findOne({ email });
-        return !user; // Returns true if email is unique, false otherwise
-      },
-      message: 'Email address is already in use.',
-    },
   },
   password: {type: String, required: true},
 });
