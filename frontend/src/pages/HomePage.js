@@ -1,6 +1,6 @@
 import Post from "../Post";
 
-export default function HomePage() {
+const HomePage = () => {
   return(
     <>
       <h2 className="info">The Latest</h2>
@@ -10,3 +10,5 @@ export default function HomePage() {
     </>
   );
 }
+
+export default HomePage;

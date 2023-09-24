@@ -2,10 +2,18 @@ import React, { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function RegisterPage() {
-
   // State to manage password input type
   const [passwordType, setPasswordType] = useState("password");
   const passwordRef = useRef(null);
+
+  // State for email input validation
+  const [isEmailValid, setEmailValid] = useState(true);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  // State to track overall form validity
+  const [isFormValid, setFormValid] = useState(false);
 
   // Function to toggle password visibility
   const togglePasswordVisibility = () => {
@@ -19,7 +27,6 @@ export default function RegisterPage() {
 
     togglePassword.addEventListener("click", togglePasswordVisibility);
 
-
     // Clean up event listeners on unmount
     return () => {
       togglePassword.removeEventListener("click", togglePasswordVisibility);
@@ -29,16 +36,43 @@ export default function RegisterPage() {
     };
   }, []);
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('')
+  // Function to validate email format
+  const validateEmail = (email) => {
+    const emailRegex = /^([\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+)$/;
 
+    return emailRegex.test(email);
+  };
+
+  // Function to handle email input change
+  const handleEmailChange = (ev) => {
+    const newEmail = ev.target.value;
+    setEmail(newEmail);
+    setEmailValid(validateEmail(newEmail));
+    updateFormValidity();
+  };
+
+  // Function to update the form's overall validity
+  const updateFormValidity = () => {
+    // Check if all required fields are filled out
+    const isValid = username.trim() !== "" && email.trim() !== "" && password.trim() !== "";
+    // Update the form's validity state
+    setFormValid(isValid && isEmailValid);
+  };
+
+  // Function to handle form submission
   async function register(ev) {
     ev.preventDefault();
-    await fetch('http://localhost:4000/register', {
-      method: 'POST',
-      body: JSON.stringify({username, password}),
-      headers: {'Content-Type':'application/json'},
-    })
+
+    if (!isFormValid) {
+      // Prevent form submission if the form is not valid
+      return;
+    }
+
+    await fetch("http://localhost:4000/register", {
+      method: "POST",
+      body: JSON.stringify({ username, email, password }),
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
   return (
@@ -46,15 +80,50 @@ export default function RegisterPage() {
       <h1>Sign up</h1>
       <form onSubmit={register}>
         <p>
-          <label htmlFor="username">Username:</label>
-          <input type="text" name="username" id="username" autoComplete="off" value={username} onChange={ev => setUsername(ev.target.value)}/>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            autoComplete="off"
+            value={username}
+            onChange={(ev) => setUsername(ev.target.value)}
+            placeholder="Username"
+          />
         </p>
         <p>
-          <label htmlFor="password">Password:</label>
-          <input type={passwordType} name="password" id="password" ref={passwordRef} autoComplete="off" value={password} onChange={ev => setPassword(ev.target.value)}/>
-          <i className={`bi ${passwordType === "password" ? "bi-eye-slash" : "bi-eye"}`} id="togglePassword"></i>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            autoComplete="off"
+            value={email}
+            onChange={handleEmailChange}
+            className={!isEmailValid ? "invalid" : ""}
+            placeholder="Email"
+          />
+          {!isEmailValid && (
+            <span className="error">Invalid email address format</span>
+          )}
         </p>
-        <button className="submit">
+        <p>
+          <input
+            type={passwordType}
+            name="password"
+            id="password"
+            ref={passwordRef}
+            autoComplete="off"
+            value={password}
+            onChange={(ev) => setPassword(ev.target.value)}
+            placeholder="Password"
+          />
+          <i
+            className={`bi ${
+              passwordType === "password" ? "bi-eye-slash" : "bi-eye"
+            }`}
+            id="togglePassword"
+          ></i>
+        </p>
+        <button className="submit" disabled={!isFormValid}>
           Sign up
         </button>
         <p className="tag">

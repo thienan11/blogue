@@ -111,6 +111,11 @@ div.post p.summary {
   color: #222;
 }
 
+span.error {
+  color: red;
+  font-size: 13px;
+}
+
 .info {
   margin-top: 0;
   font-weight: bold;

@@ -46,12 +46,25 @@ export default function LoginPage() {
       <h1>Log in</h1>
       <form method="post">
         <p>
-          <label htmlFor="username">Username:</label>
-          <input type="text" name="username" id="username" autoComplete="off"/>
+          {/* <label htmlFor="username">Username:</label> */}
+          <input 
+            type="text" 
+            name="username" 
+            id="username" 
+            autoComplete="off"
+            placeholder="Username"
+          />
         </p>
         <p>
-          <label htmlFor="password">Password:</label>
-          <input type={passwordType} name="password" id="password" ref={passwordRef} autoComplete="off"/>
+          {/* <label htmlFor="password">Password:</label> */}
+          <input 
+            type={passwordType} 
+            name="password" 
+            id="password" 
+            ref={passwordRef} 
+            autoComplete="off"
+            placeholder="Password"
+          />
           <i className={`bi ${passwordType === "password" ? "bi-eye-slash" : "bi-eye"}`} id="togglePassword"></i>
         </p>
         <Link>Forgot password?</Link>
