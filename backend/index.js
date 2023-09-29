@@ -28,8 +28,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cors(
-  { credentials:true, 
-    origin:'https://bloguetown.vercel.app',
+  { credentials:true,
     methods:["POST", "GET"]
   }
 ));
