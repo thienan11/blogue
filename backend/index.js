@@ -18,6 +18,8 @@ const app = express();
 const salt = bcrypt.genSaltSync(10);
 const secret = '1234567890qwertyuioasdfghjkzxcvbnm';
 
+const PORT = 8000;
+
 app.use(cors({credentials:true, origin:'https://bloguetown.vercel.app'}));
 app.use(express.json());
 app.use(cookieParser());
@@ -73,7 +75,10 @@ app.post('/logout', (req, res) => {
 })
 
 
-app.listen(4000);
+// app.listen(4000);
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
 // UserSchema.path('email').validate(function (email) {
 //   var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
