@@ -20,9 +20,16 @@ const secret = '1234567890qwertyuioasdfghjkzxcvbnm';
 
 const PORT = 8000;
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 app.use(cors(
   { credentials:true, 
-    origin:['https://bloguetown.vercel.app'],
+    origin:'https://bloguetown.vercel.app',
     methods:["POST", "GET"]
   }
 ));
