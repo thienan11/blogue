@@ -18,7 +18,7 @@ const app = express();
 const salt = bcrypt.genSaltSync(10);
 const secret = '1234567890qwertyuioasdfghjkzxcvbnm';
 
-app.use(cors({credentials:true, origin:'http://localhost:3000'}));
+app.use(cors({credentials:true, origin:'https://bloguetown.vercel.app'}));
 app.use(express.json());
 app.use(cookieParser());
 

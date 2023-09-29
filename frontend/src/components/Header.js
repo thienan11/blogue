@@ -9,7 +9,7 @@ const Header = () => {
   const {setUserInfo, userInfo} = useContext(UserContext);
 
   useEffect(() => {
-    fetch('http://localhost:4000/profile', {
+    fetch('https://bloguetown-api.vercel.app/profile', {
       credentials: 'include',
     }).then(response => {
       response.json().then(userInfo => {
@@ -19,7 +19,7 @@ const Header = () => {
   }, [])
 
   function logout() {
-    fetch('http://localhost:4000/logout', {
+    fetch('https://bloguetown-api.vercel.app/logout', {
       credentials: 'include',
       method: 'POST',
     });
