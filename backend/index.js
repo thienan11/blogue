@@ -20,8 +20,13 @@ const secret = '1234567890qwertyuioasdfghjkzxcvbnm';
 
 const PORT = 8000;
 
-// app.use(cors({credentials:true, origin:'https://bloguetown.vercel.app'}));
-app.use(cors())
+app.use(cors(
+  { credentials:true, 
+    origin:['https://bloguetown.vercel.app'],
+    methods:["POST", "GET"]
+  }
+));
+
 app.use(express.json());
 app.use(cookieParser());
 
