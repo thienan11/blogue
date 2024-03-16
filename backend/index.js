@@ -1,4 +1,4 @@
-// mongodb+srv://blogue:gI1yt6aXrGUfV1a2@cluster0.nxrwv81.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+// mongodb+srv://blogue:gI1yt6aXrGUfV1a2@cluster0.nxrwv81.mongodb.net/?retryWrites=true&w=majority
 // gI1yt6aXrGUfV1a2
 
 const path = require('path');
@@ -18,28 +18,11 @@ const app = express();
 const salt = bcrypt.genSaltSync(10);
 const secret = '1234567890qwertyuioasdfghjkzxcvbnm';
 
-const PORT = 8000;
-
-// app.use((req, res, next) => {
-//   res.setHeader('Access-Control-Allow-Credentials', 'true');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-//   next();
-// });
-
-// app.use(cors(
-//   { credentials:true,
-//     methods:["POST", "GET"]
-//   }
-// ));
-
-const corsOptions = {
-  origin: 'https://bloguetown.vercel.app', // Your frontend's origin
-  credentials: true,
-  methods: ['GET', 'POST'], // Adjust based on your needs
-};
-
-app.use(cors(corsOptions));
+// app.use(cors({credentials:true, origin:'http://localhost:3000'}));
+app.use(cors(
+  {credentials:true, 
+    origin:'https://bloguetown.vercel.app'
+  }));
 
 app.use(express.json());
 app.use(cookieParser());
@@ -99,10 +82,8 @@ app.get('/', (req, res) => {
   res.send('Welcome to the server!');
 });
 
+
 // app.listen(4000);
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
 
 // UserSchema.path('email').validate(function (email) {
 //   var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
