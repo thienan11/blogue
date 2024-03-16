@@ -1,4 +1,4 @@
-// mongodb+srv://blogue:gI1yt6aXrGUfV1a2@cluster0.nxrwv81.mongodb.net/?retryWrites=true&w=majority
+// mongodb+srv://blogue:gI1yt6aXrGUfV1a2@cluster0.nxrwv81.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 // gI1yt6aXrGUfV1a2
 
 const path = require('path');
@@ -36,7 +36,8 @@ app.use(cors(
 app.use(express.json());
 app.use(cookieParser());
 
-mongoose.connect('mongodb+srv://blogue:gI1yt6aXrGUfV1a2@cluster0.nxrwv81.mongodb.net/?retryWrites=true&w=majority');
+// mongoose.connect('mongodb+srv://blogue:gI1yt6aXrGUfV1a2@cluster0.nxrwv81.mongodb.net/?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://blogue:gI1yt6aXrGUfV1a2@cluster0.nxrwv81.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
 
 app.post('/register', async (req, res) => {
   const {username, email, password} = req.body;
@@ -86,6 +87,9 @@ app.post('/logout', (req, res) => {
   res.cookie('token', '').json('ok');
 })
 
+app.get('/', (req, res) => {
+  res.send('Welcome to the server!');
+});
 
 // app.listen(4000);
 app.listen(PORT, () => {
