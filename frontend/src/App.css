@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 
 :root {
   font-family: Quicksand;
@@ -7,7 +7,7 @@
   scrollbar-gutter: stable; */
 }
 body {
-  color: #5D8AA8;
+  color: #5d8aa8;
   /* overflow-y: scroll; */
 }
 
@@ -59,7 +59,7 @@ header a {
   color: inherit;
 }
 
-header a.logo{
+header a.logo {
   font-weight: bold;
   font-size: 2rem;
 }
@@ -95,13 +95,13 @@ div.post div.texts h2 {
 div.post div.texts p.info {
   margin: 6px 0;
   color: #888;
-  font-size: .7rem;
+  font-size: 0.7rem;
   font-weight: bold;
   display: flex;
   gap: 10px;
 }
 
-div.post p.info a.author{
+div.post p.info a.author {
   color: #222;
 }
 
@@ -125,7 +125,7 @@ span.error {
 
 img.profile_img {
   border-radius: 50%;
-  max-width: 32%;  
+  max-width: 32%;
   height: auto;
   float: right;
 }
@@ -133,15 +133,17 @@ img.profile_img {
 /* BUTTON STYLING */
 .button-4 {
   appearance: none;
-  background-color: #FAFBFC;
+  background-color: #fafbfc;
   border: 1px solid rgba(27, 31, 35, 0.15);
   border-radius: 6px;
-  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
+    rgba(255, 255, 255, 0.25) 0 1px 0 inset;
   box-sizing: border-box;
-  color: #24292E;
+  color: #24292e;
   cursor: pointer;
   display: inline-block;
-  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
@@ -158,20 +160,20 @@ img.profile_img {
 }
 
 .button-4:hover {
-  background-color: #F3F4F6;
+  background-color: #f3f4f6;
   text-decoration: none;
   transition-duration: 0.1s;
 }
 
 .button-4:disabled {
-  background-color: #FAFBFC;
+  background-color: #fafbfc;
   border-color: rgba(27, 31, 35, 0.15);
-  color: #959DA5;
+  color: #959da5;
   cursor: default;
 }
 
 .button-4:active {
-  background-color: #EDEFF2;
+  background-color: #edeff2;
   box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
   transition: none 0s;
 }
@@ -194,7 +196,6 @@ div.container form i {
   color: #111;
 }
 
-
 /* LOGIN + REGISTER */
 div.container {
   background-color: #fff;
@@ -206,7 +207,7 @@ div.container {
   box-sizing: border-box;
 }
 
-div.container h1{
+div.container h1 {
   padding: 5px 0;
   font-size: 1.2rem;
   color: #111;
@@ -231,7 +232,7 @@ div.container button {
   box-sizing: border-box;
   width: 100%;
   padding: 3%;
-  background: #5D8AA8;
+  background: #5d8aa8;
   border: none;
   color: #fff;
   font-size: 14px;
@@ -244,7 +245,7 @@ div.container p.tag {
   color: #111;
   margin-top: 15px;
   margin-bottom: 5px;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 /* Styles for Create Post Page */
@@ -275,7 +276,7 @@ div.container p.tag {
 .create-post-form button {
   padding: 10px 20px; /* Adjust padding as needed */
   font-size: 16px; /* Adjust font size as needed */
-  background-color: #5D8AA8; /* Button color */
+  background-color: #5d8aa8; /* Button color */
   color: white; /* Text color */
   border: none; /* No border */
   border-radius: 5px; /* Slightly rounded corners */
