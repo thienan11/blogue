@@ -11,9 +11,9 @@ body {
   /* overflow-y: scroll; */
 }
 
-/* ::-webkit-scrollbar { 
+::-webkit-scrollbar { 
   display: none; 
-} */
+}
 
 img {
   max-width: 100%;
