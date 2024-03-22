@@ -4,7 +4,7 @@ A simple interactive blog site using MongoDB, Express.js, React.js, and Node.js.
 
 ## Installation
 
-To install dependencies run `npm install` on both frontend and backend
+To install all necessary dependencies, run `yarn` in both frontend and backend directories.
 
 ## Running
 
