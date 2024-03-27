@@ -63,7 +63,8 @@ app.post("/login", async (req, res) => {
       if (err) throw err;
       res.cookie("token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // Only set secure cookies in production
+        // secure: process.env.NODE_ENV === 'production', // Only set secure cookies in production
+        secure: true,
         sameSite: 'None',
       }).json({
         id: userDoc._id,
