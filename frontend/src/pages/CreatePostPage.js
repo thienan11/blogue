@@ -36,20 +36,29 @@ export default function CreatePostPage() {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
-  const [files, setFiles] = useState("");
+  // const [files, setFiles] = useState("");
   const [redirect, setRedirect] = useState(false);
 
   async function createNewPost(ev) {
-    const data = new FormData();
-    data.set("title", title);
-    data.set("summary", summary);
-    data.set("content", content);
-    data.set("file", files[0]); // grab first file (if theres multiple)
+    // const data = new FormData();
+    // data.set("title", title);
+    // data.set("summary", summary);
+    // data.set("content", content);
+    // data.set("file", files[0]); // grab first file (if theres multiple)
     ev.preventDefault();
-    const response = await fetch("http://localhost:4000/post", {
+    const post = { title, summary, content };
+    const response = await fetch("https://bloguetown-api.vercel.app/post", {
       // https://bloguetown-api.vercel.app/post
+      // method: "POST",
+      // body: data,
+      // credentials: "include",
       method: "POST",
-      body: data,
+      headers: {
+          'Content-Type': 'application/json',
+          // Include other headers as needed, for example, for authentication
+      },
+      body: JSON.stringify(post),
+      credentials: "include",
     });
 
     if (response.ok) {
@@ -58,7 +67,7 @@ export default function CreatePostPage() {
   }
 
   if (redirect) {
-    return <Navigate to={'/'} />
+    return <Navigate to={"/"} />;
   }
   return (
     <form className="create-post-form" onSubmit={createNewPost}>
@@ -74,7 +83,7 @@ export default function CreatePostPage() {
         value={summary}
         onChange={(ev) => setSummary(ev.target.value)}
       />
-      <input type="file" onChange={(ev) => setFiles(ev.target.files)} />
+      {/* <input type="file" onChange={(ev) => setFiles(ev.target.files)} /> */}
       <ReactQuill
         value={content}
         onChange={(newValue) => setContent(newValue)}

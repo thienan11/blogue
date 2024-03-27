@@ -8,8 +8,8 @@ const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
-const multer = require("multer");
-const uploadMiddleware = multer({ dest: "uploads/" });
+// const multer = require("multer");
+// const uploadMiddleware = multer({ dest: "uploads/" });
 const fs = require("fs");
 
 const User = require("./models/User");
@@ -20,6 +20,8 @@ const app = express();
 
 const salt = bcrypt.genSaltSync(10);
 const secret = "1234567890qwertyuioasdfghjkzxcvbnm";
+
+const port = process.env.PORT || 4000;
 
 // app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(cors(
@@ -81,34 +83,64 @@ app.post("/logout", (req, res) => {
   res.cookie("token", "").json("ok");
 });
 
-app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
-  const { originalname, path } = req.file;
-  const parts = originalname.split(".");
-  const ext = parts[parts.length - 1];
-  const newPath = path + "." + ext;
-  fs.renameSync(path, newPath);
+app.post("/post", async (req, res) => {
+  // const { originalname, path } = req.file;
+  // const parts = originalname.split(".");
+  // const ext = parts[parts.length - 1];
+  // const newPath = path + "." + ext;
+  // fs.renameSync(path, newPath);
 
-  const { title, summary, content } = req.body;
-  const postDoc = await Post.create({
-    title,
-    summary,
-    content,
-    image: newPath,
-  });
+  // const { token } = req.cookies;
+  // jwt.verify(token, secret, {}, async (err, info) => {
+  //   if (err) throw err;
+  //   const { title, summary, content } = req.body;
+  //   const postDoc = await Post.create({
+  //     title,
+  //     summary,
+  //     content,
+  //     // image: newPath,
+  //     author: info.id,
+  //   });
 
-  res.json(postDoc);
+  //   res.json(postDoc);
+  // });
+  const { token } = req.cookies;
+    jwt.verify(token, secret, {}, async (err, info) => {
+      if (err) {
+        res.status(401).json("Unauthorized");
+        return;
+      }
+      const { title, summary, content } = req.body;
+      try {
+        const postDoc = await Post.create({
+            title,
+            summary,
+            content,
+            author: info.id,
+        });
+        res.json(postDoc);
+      } catch (error) {
+        res.status(400).json(error);
+      }
+    });
+});
+
+app.get("/post", async (req, res) => {
+  res.json(
+    await Post.find()
+    .populate("author", ["username"])
+    .sort({createdAt: -1})
+    .limit(20)
+  );
 });
 
 app.get("/", (req, res) => {
   res.send("Welcome to the server!");
 });
 
-// app.listen(4000);
-
-if (!process.env.VERCEL) {
-  const PORT = process.env.PORT || 4000;
-  app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
-}
+// app.listen(port, () => {
+//   console.log(`Server running at http://localhost:${port}`);
+// });
 
 // UserSchema.path('email').validate(function (email) {
 //   var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;

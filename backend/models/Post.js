@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const {Schema, model} = mongoose;
+const mongoose = require("mongoose");
+const { Schema, model } = mongoose;
 
 // const postSchema = new Schema({
 //   title: String,
@@ -12,15 +12,18 @@ const {Schema, model} = mongoose;
 //   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 // });
 
-const postSchema = new Schema({
-  title: String,
-  summary: String,
-  content: String,
-  image: String,
-}, {
-  timestamps: true,
-});
+const postSchema = new Schema(
+  {
+    title: String,
+    summary: String,
+    content: String,
+    author: {type:Schema.Types.ObjectId, ref:"User"},
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const PostModel = model('Post', postSchema);
+const PostModel = model("Post", postSchema);
 
 module.exports = PostModel;
