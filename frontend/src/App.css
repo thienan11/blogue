@@ -3,12 +3,12 @@
 
 body {
   color: #5d8aa8;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   /* overflow-y: scroll; */
 }
 
-::-webkit-scrollbar { 
-  display: none; 
+::-webkit-scrollbar {
+  display: none;
 }
 
 img {
@@ -85,7 +85,8 @@ div.post {
   padding: 10px 15px;
 }
 
-div.post div.texts h2, div.post p.summary {
+div.post div.texts h2,
+div.post p.summary {
   line-height: 1.6; /* spacing between elements in post*/
 }
 
@@ -256,8 +257,8 @@ div.container p.tag {
   font-size: 0.9rem;
 }
 
-/* Styles for Create Post Page */
-.create-post-form {
+/* Styles for Create and Edit Post Page */
+.create-edit-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -265,23 +266,23 @@ div.container p.tag {
   margin: 20px auto;
 }
 
-.create-post-form input[type="title"],
-.create-post-form input[type="summary"] {
+.create-edit-form input[type="title"],
+.create-edit-form input[type="summary"] {
   font-size: 16px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.create-post-form input[type="file"] {
+.create-edit-form input[type="file"] {
   border: 1px solid #ccc;
   display: block;
   padding: 10px;
   cursor: pointer;
 }
 
-/* Styles for the Create Post button */
-.create-post-form button {
+/* Styles for the Create/Edit Post button */
+.create-edit-form button {
   padding: 10px 20px; /* Adjust padding as needed */
   font-size: 16px; /* Adjust font size as needed */
   background-color: #5d8aa8; /* Button color */
@@ -292,11 +293,11 @@ div.container p.tag {
   transition: background-color 0.3s ease; /* Smooth background color transition on hover */
 }
 
-.create-post-form button:hover {
+.create-edit-form button:hover {
   background-color: #0056b3; /* Darker shade on hover */
 }
 
-.create-post-form .ql-editor {
+.create-edit-form .ql-editor {
   min-height: 250px;
   color: #333; /* Set your preferred font color here */
 }
@@ -367,9 +368,31 @@ div.container p.tag {
 }
 
 /* If you have headings within your post content */
-.post-page h2, .post-page h3, .post-page h4 {
+.post-page h2,
+.post-page h3,
+.post-page h4 {
   color: #333; /* Slightly darker than the main text for emphasis */
   margin-top: 2rem; /* Adds space above the heading */
   margin-bottom: 1rem; /* Adds space below the heading */
   /* margin: 0; */
+}
+
+div.edit-row {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+div.post-page a.edit-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+}
+
+a svg {
+  height: 16px;
 }

@@ -9,6 +9,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import UserContextProvider from './components/UserContext';
 import CreatePostPage from './pages/CreatePostPage';
 import PostPage from './pages/PostPage';
+import EditPostPage from './pages/EditPostPage';
 
 function App() {
 
@@ -28,6 +29,8 @@ function App() {
 
           <Route path={'/post/:id'} element={ <PostPage/> }/>
 
+          <Route path={"/edit/:id"} element={<EditPostPage />} />
+          
           <Route path="*" element={<NotFoundPage />} />
 
         </Route>

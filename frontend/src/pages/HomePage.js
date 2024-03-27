@@ -6,6 +6,7 @@ const HomePage = () => {
 
   useEffect(() => {
     fetch("https://bloguetown-api.vercel.app/post").then((response) => {
+      // http://localhost:4000/post
       response.json().then((posts) => {
         setPosts(posts);
       });

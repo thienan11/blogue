@@ -61,15 +61,16 @@ app.post("/login", async (req, res) => {
     // logged in
     jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
       if (err) throw err;
-      res.cookie("token", token, {
-        httpOnly: true,
-        // secure: process.env.NODE_ENV === 'production', // Only set secure cookies in production
-        secure: true,
-        sameSite: 'None',
-      }).json({
-        id: userDoc._id,
-        username,
-      });
+      res
+        .cookie("token", token, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "None",
+        })
+        .json({
+          id: userDoc._id,
+          username,
+        });
     });
   } else {
     res.status(400).json("wrong credentials.");
@@ -86,8 +87,13 @@ app.get("/profile", (req, res) => {
 
 app.post("/logout", (req, res) => {
   // res.cookie("token", "").json("ok");
-  res.cookie('token', '', { expires: new Date(0), httpOnly: true, secure: true, sameSite: 'None' });
-  res.status(200).json({ message: 'Logged out successfully' });
+  res.cookie("token", "", {
+    expires: new Date(0),
+    httpOnly: true,
+    secure: true,
+    sameSite: "None",
+  });
+  res.status(200).json({ message: "Logged out successfully" });
 });
 
 app.post("/post", async (req, res) => {
@@ -133,17 +139,54 @@ app.post("/post", async (req, res) => {
   // });
 });
 
+app.put("/post", async (req, res) => {
+  const { token } = req.cookies;
+  jwt.verify(token, secret, {}, async (err, info) => {
+    if (err) throw err;
+    const { id, title, summary, content } = req.body;
+    const postDoc = await Post.findById(id);
+    const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
+    if (!isAuthor) {
+      return res.status(400).json("you are not the author!!");
+    }
+
+    // await postDoc.update({
+    //   title,
+    //   summary,
+    //   content,
+    // });
+
+    // if (postDoc) {
+    //   res.json(postDoc); // This will send the updated document back with a 200 OK status
+    // } else {
+    //   res.status(404).send('Post not found');
+    // }
+
+    const updatedPost = await Post.findByIdAndUpdate(
+      id,
+      { title, summary, content },
+      { new: true }
+    ); // Make sure you're actually getting the updated document with { new: true }
+
+    if (updatedPost) {
+      res.json(updatedPost); // This will send the updated document back with a 200 OK status
+    } else {
+      res.status(404).send("Post not found");
+    }
+  });
+});
+
 app.get("/post", async (req, res) => {
   res.json(
     await Post.find()
-    .populate("author", ["username"])
-    .sort({createdAt: -1})
-    .limit(20)
+      .populate("author", ["username"])
+      .sort({ createdAt: -1 })
+      .limit(20)
   );
 });
 
-app.get("/post/:id", async(req, res) => {
-  const {id} = req.params;
+app.get("/post/:id", async (req, res) => {
+  const { id } = req.params;
   const postDoc = await Post.findById(id).populate("author", ["username"]);
   res.json(postDoc);
 });
