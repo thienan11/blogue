@@ -105,10 +105,10 @@ app.get("/", (req, res) => {
 
 // app.listen(4000);
 
-// if (!process.env.VERCEL) {
-//   const PORT = process.env.PORT || 4000;
-//   app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
-// }
+if (!process.env.VERCEL) {
+  const PORT = process.env.PORT || 4000;
+  app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+}
 
 // UserSchema.path('email').validate(function (email) {
 //   var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;

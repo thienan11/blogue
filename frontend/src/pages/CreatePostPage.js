@@ -1,6 +1,7 @@
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
 
 const modules = {
   toolbar: [
@@ -36,21 +37,29 @@ export default function CreatePostPage() {
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
   const [files, setFiles] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
   async function createNewPost(ev) {
     const data = new FormData();
     data.set("title", title);
     data.set("summary", summary);
     data.set("content", content);
-    data.set('file', files[0]); // grab first file (if theres multiple)
+    data.set("file", files[0]); // grab first file (if theres multiple)
     ev.preventDefault();
-    const response = await fetch("https://bloguetown-api.vercel.app/post", {
-      method: 'POST',
+    const response = await fetch("http://localhost:4000/post", {
+      // https://bloguetown-api.vercel.app/post
+      method: "POST",
       body: data,
     });
-    console.log(await response.json());
+
+    if (response.ok) {
+      setRedirect(true);
+    }
   }
 
+  if (redirect) {
+    return <Navigate to={'/'} />
+  }
   return (
     <form className="create-post-form" onSubmit={createNewPost}>
       <input
@@ -65,9 +74,7 @@ export default function CreatePostPage() {
         value={summary}
         onChange={(ev) => setSummary(ev.target.value)}
       />
-      <input 
-        type="file" 
-        onChange={(ev) => setFiles(ev.target.files)} />
+      <input type="file" onChange={(ev) => setFiles(ev.target.files)} />
       <ReactQuill
         value={content}
         onChange={(newValue) => setContent(newValue)}
