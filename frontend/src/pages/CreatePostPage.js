@@ -48,7 +48,7 @@ export default function CreatePostPage() {
     ev.preventDefault();
     const post = { title, summary, content };
     const response = await fetch("https://bloguetown-api.vercel.app/post", {
-      // https://bloguetown-api.vercel.app/post
+      // http://localhost:4000/post
       // method: "POST",
       // body: data,
       // credentials: "include",

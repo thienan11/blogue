@@ -63,7 +63,7 @@ app.post("/login", async (req, res) => {
       if (err) throw err;
       res.cookie("token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // Only set secure cookies in production
+        // secure: process.env.NODE_ENV === 'production', // Only set secure cookies in production
         sameSite: 'None',
       }).json({
         id: userDoc._id,
@@ -141,15 +141,21 @@ app.get("/post", async (req, res) => {
   );
 });
 
+app.get("/post/:id", async(req, res) => {
+  const {id} = req.params;
+  const postDoc = await Post.findById(id).populate("author", ["username"]);
+  res.json(postDoc);
+});
+
 app.get("/", (req, res) => {
   res.send("Welcome to the server!");
 });
 
-if (process.env.NODE_ENV === 'development') {
-  console.log('Logging an error stack trace for debugging:');
-} else {
-  console.log('Logging minimal error information for production:');
-}
+// if (process.env.NODE_ENV === 'development') {
+//   console.log('Logging an error stack trace for debugging:');
+// } else {
+//   console.log('Logging minimal error information for production:');
+// }
 
 // app.listen(port, () => {
 //   console.log(`Server running at http://localhost:${port}`);

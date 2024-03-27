@@ -1,13 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 
-:root {
-  font-family: Quicksand;
-  /* overflow: auto;
-  scrollbar-gutter: stable; */
-}
 body {
   color: #5d8aa8;
+  font-family: 'Quicksand', sans-serif;
   /* overflow-y: scroll; */
 }
 
@@ -21,6 +17,8 @@ img {
 
 a {
   text-decoration: none;
+  color: inherit;
+  outline: none;
 }
 
 main {
@@ -70,15 +68,25 @@ header nav {
   align-items: center;
 }
 
-div.post {
+/* div.post {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
   gap: 20px;
-  /* margin: 20px 0px; */
   margin-bottom: 20px;
   align-items: center;
   border-bottom: 1px solid #f3f0f0;
   padding: 10px 15px;
+} */
+
+div.post {
+  display: block; /* Change from grid to block if images are no longer needed */
+  margin-bottom: 20px;
+  border-bottom: 1px solid #f3f0f0;
+  padding: 10px 15px;
+}
+
+div.post div.texts h2, div.post p.summary {
+  line-height: 1.6; /* spacing between elements in post*/
 }
 
 div.post:hover {
@@ -291,4 +299,77 @@ div.container p.tag {
 .create-post-form .ql-editor {
   min-height: 250px;
   color: #333; /* Set your preferred font color here */
+}
+
+/* Styles for Post Page */
+.post-page {
+  max-width: 800px; /* Limits the width for readability */
+  margin: auto; /* Centers the content */
+  padding: 20px;
+  color: #333; /* Dark gray for better readability */
+}
+
+.post-page h1 {
+  font-size: 2.5rem; /* Large title to catch attention */
+  margin-bottom: 0.5rem; /* Adds space below the title */
+  color: #5d8aa8;
+}
+
+.post-page time {
+  font-size: 0.9rem; /* Smaller font for the date */
+  color: #888; /* Lighter color for less emphasis */
+  margin-bottom: 1rem; /* Adds space below the date */
+  display: block; /* Ensures it takes its own line */
+}
+
+.post-page .author {
+  font-size: 1rem; /* Adjust as necessary */
+  color: #555; /* Darker than the date for emphasis */
+  font-weight: bold; /* Makes the author's name stand out */
+  margin-bottom: 2rem; /* Adds space before the content starts */
+}
+
+.post-page div {
+  line-height: 1.6; /* Improves readability of the content */
+  font-size: 1.1rem; /* Adjust as necessary for readability */
+}
+
+/* Styles for the content, assuming it might contain common elements */
+.post-page div.content p {
+  line-height: 1.6rem;
+  padding: 0;
+  margin: 0;
+}
+
+.post-page a {
+  color: #5d8aa8; /* Theme color for links */
+  text-decoration: none; /* Removes underline */
+}
+
+.post-page a:hover {
+  text-decoration: underline; /* Adds underline on hover for distinction */
+}
+
+.post-page img {
+  max-width: 100%; /* Ensures images are not wider than the post */
+  height: auto; /* Maintains aspect ratio */
+  margin: 20px 0; /* Adds vertical space around images */
+}
+
+.post-page ul,
+.post-page ol {
+  padding-left: 20px; /* Adds indentation to lists */
+  margin: 10px 0; /* Adds space around lists */
+}
+
+.post-page li {
+  margin-bottom: 0.5rem; /* Adds space between list items */
+}
+
+/* If you have headings within your post content */
+.post-page h2, .post-page h3, .post-page h4 {
+  color: #333; /* Slightly darker than the main text for emphasis */
+  margin-top: 2rem; /* Adds space above the heading */
+  margin-bottom: 1rem; /* Adds space below the heading */
+  /* margin: 0; */
 }
