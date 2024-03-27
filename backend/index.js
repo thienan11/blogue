@@ -61,7 +61,11 @@ app.post("/login", async (req, res) => {
     // logged in
     jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
       if (err) throw err;
-      res.cookie("token", token).json({
+      res.cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production', // Only set secure cookies in production
+        sameSite: 'None',
+      }).json({
         id: userDoc._id,
         username,
       });
@@ -90,39 +94,40 @@ app.post("/post", async (req, res) => {
   // const newPath = path + "." + ext;
   // fs.renameSync(path, newPath);
 
-  // const { token } = req.cookies;
-  // jwt.verify(token, secret, {}, async (err, info) => {
-  //   if (err) throw err;
-  //   const { title, summary, content } = req.body;
-  //   const postDoc = await Post.create({
-  //     title,
-  //     summary,
-  //     content,
-  //     // image: newPath,
-  //     author: info.id,
-  //   });
-
-  //   res.json(postDoc);
-  // });
   const { token } = req.cookies;
-    jwt.verify(token, secret, {}, async (err, info) => {
-      if (err) {
-        res.status(401).json("Unauthorized");
-        return;
-      }
-      const { title, summary, content } = req.body;
-      try {
-        const postDoc = await Post.create({
-            title,
-            summary,
-            content,
-            author: info.id,
-        });
-        res.json(postDoc);
-      } catch (error) {
-        res.status(400).json(error);
-      }
+  jwt.verify(token, secret, {}, async (err, info) => {
+    if (err) throw err;
+    const { title, summary, content } = req.body;
+    const postDoc = await Post.create({
+      title,
+      summary,
+      content,
+      // image: newPath,
+      author: info.id,
     });
+
+    res.json(postDoc);
+  });
+
+  // const { token } = req.cookies;
+  //   jwt.verify(token, secret, {}, async (err, info) => {
+  //     if (err) {
+  //       res.status(401).json("Unauthorized");
+  //       return;
+  //     }
+  //     const { title, summary, content } = req.body;
+  //     try {
+  //       const postDoc = await Post.create({
+  //           title,
+  //           summary,
+  //           content,
+  //           author: info.id,
+  //       });
+  //       res.json(postDoc);
+  //     } catch (error) {
+  //       res.status(400).json(error);
+  //   }
+  // });
 });
 
 app.get("/post", async (req, res) => {
@@ -137,6 +142,12 @@ app.get("/post", async (req, res) => {
 app.get("/", (req, res) => {
   res.send("Welcome to the server!");
 });
+
+if (process.env.NODE_ENV === 'development') {
+  console.log('Logging an error stack trace for debugging:');
+} else {
+  console.log('Logging minimal error information for production:');
+}
 
 // app.listen(port, () => {
 //   console.log(`Server running at http://localhost:${port}`);
