@@ -38,12 +38,11 @@ mongoose.connect(
 );
 
 app.post("/register", async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, password } = req.body;
 
   try {
     const userDoc = await User.create({
       username,
-      email,
       password: bcrypt.hashSync(password, salt),
     });
     res.json(userDoc);
@@ -204,10 +203,5 @@ app.get("/", (req, res) => {
 // app.listen(port, () => {
 //   console.log(`Server running at http://localhost:${port}`);
 // });
-
-// UserSchema.path('email').validate(function (email) {
-//   var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-//   return emailRegex.test(email.text); // Assuming email has a text attribute
-// }, 'The e-mail field cannot be empty.')
 
 module.exports = app;

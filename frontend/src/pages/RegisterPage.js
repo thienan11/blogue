@@ -6,10 +6,7 @@ export default function RegisterPage() {
   const [passwordType, setPasswordType] = useState("password");
   const passwordRef = useRef(null);
 
-  // State for email input validation
-  const [isEmailValid, setEmailValid] = useState(true);
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   // State to track overall form validity
@@ -36,29 +33,12 @@ export default function RegisterPage() {
     };
   }, []);
 
-  // Function to validate email format
-  const validateEmail = (email) => {
-    const emailRegex = /^([\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+)$/;
-
-    return emailRegex.test(email);
-  };
-
-  // // Function to handle email input change
-  // const handleEmailChange = (ev) => {
-  //   const newEmail = ev.target.value;
-  //   setEmail(newEmail);
-  //   setEmailValid(validateEmail(newEmail));
-  //   updateFormValidity();
-  // };
   // Function to handle input field changes
 const handleInputChange = (ev) => {
   const { name, value } = ev.target;
   // Update the corresponding state variable
   if (name === "username") {
     setUsername(value);
-  } else if (name === "email") {
-    setEmail(value);
-    setEmailValid(validateEmail(value));
   } else if (name === "password") {
     setPassword(value);
   }
@@ -69,9 +49,9 @@ const handleInputChange = (ev) => {
   // Function to update the form's overall validity
   const updateFormValidity = () => {
     // Check if all required fields are filled out
-    const isValid = username.trim() !== "" && email.trim() !== "" && password.trim() !== "";
+    const isValid = username.trim() !== "" && password.trim() !== "";
     // Update the form's validity state
-    setFormValid(isValid && isEmailValid);
+    setFormValid(isValid);
   };
 
   // Function to handle form submission
@@ -85,7 +65,7 @@ const handleInputChange = (ev) => {
 
     const response = await fetch("https://bloguetown-api.vercel.app/register", {
       method: "POST",
-      body: JSON.stringify({ username, email, password }),
+      body: JSON.stringify({ username, password }),
       headers: { "Content-Type": "application/json" },
     });
     if (response.status === 200) {
@@ -110,21 +90,6 @@ const handleInputChange = (ev) => {
             placeholder="Username"
             onChange={handleInputChange}
           />
-        </p>
-        <p>
-          <input
-            type="text"
-            name="email"
-            id="email"
-            autoComplete="off"
-            value={email}
-            onChange={handleInputChange}
-            className={!isEmailValid ? "invalid" : ""}
-            placeholder="Email"
-          />
-          {!isEmailValid && (
-            <span className="error">Invalid email address</span>
-          )}
         </p>
         <p>
           <input
