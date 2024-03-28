@@ -17,7 +17,10 @@ export default function Post({
           <h2>{title}</h2>
           <p className="info">
             <a className="author">By: {author.username}</a>
-            <time>{format(new Date(createdAt), "MMM d, yyyy HH:mm")}</time>
+            <div className="date-container">
+              <img src="/icons/calendar.svg"/>
+              <time>{format(new Date(createdAt), "MMM d, yyyy hh:mm a")}</time>
+            </div>
           </p>
           <p className="summary">{summary}</p>
         </div>

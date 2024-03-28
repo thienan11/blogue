@@ -25,7 +25,10 @@ export default function PostPage() {
   return (
     <div className="post-page">
       <h1>{postInfo.title}</h1>
-      <time>{format(new Date(postInfo.createdAt), "MMM d, yyyy")}</time>
+      <div className="date-container">
+        <img src="/icons/calendar.svg"/>
+        <time>{format(new Date(postInfo.createdAt), "MMM d, yyyy")}</time>
+      </div>
       <div className="author">by {postInfo.author.username}</div>
 
       {userInfo.id === postInfo.author._id && (

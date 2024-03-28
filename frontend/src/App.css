@@ -108,16 +108,29 @@ div.post div.texts p.info {
   font-weight: bold;
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 
 div.post p.info a.author {
   color: #222;
+  margin-right: 5px;
 }
 
 div.post p.summary {
   margin: 10px 0;
   line-height: 1.4rem;
   color: #222;
+}
+
+div.date-container {
+  display: flex;
+  align-items: center;
+}
+
+div.date-container img {
+  width: 15px;
+  height: auto;
+  margin-right: 3px;
 }
 
 span.error {
@@ -319,7 +332,6 @@ div.container p.tag {
 .post-page time {
   font-size: 0.9rem; /* Smaller font for the date */
   color: #888; /* Lighter color for less emphasis */
-  margin-bottom: 1rem; /* Adds space below the date */
   display: block; /* Ensures it takes its own line */
 }
 
@@ -393,6 +405,6 @@ div.post-page a.edit-button {
   border-radius: 5px;
 }
 
-a svg {
+div.post-page a svg {
   height: 16px;
 }
