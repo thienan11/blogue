@@ -8,21 +8,51 @@ const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 export default function PostPage() {
   const [postInfo, setPostInfo] = useState(null);
   const { userInfo } = useContext(UserContext);
+  const [isLoading, setIsLoading] = useState(true); // Initialize loading state
+  const [error, setError] = useState(null); // Initialize error state
 
   const { id } = useParams();
 
   // get post info
   // [] is dependencies?
   useEffect(() => {
-    fetch(`https://bloguetown-api.vercel.app/post/${id}`).then((response) => {
-      // http://localhost:4000/post/${id}
-      response.json().then((postInfo) => {
+    const fetchPostInfo = async () => {
+      try {
+        setIsLoading(true); // Start loading
+        const response = await fetch(`https://bloguetown-api.vercel.app/post/${id}`);
+        // http://localhost:4000/post/${id}
+        if (!response.ok) {
+          throw new Error('Could not fetch post data');
+        }
+        const postInfo = await response.json();
         setPostInfo(postInfo);
-      });
-    });
+      } catch (err) {
+        setError(err.message); // Catch and set any error that occurs during fetch
+      } finally {
+        setIsLoading(false); // Ensure loading state is updated when operation is complete
+      }
+    };
+    fetchPostInfo();
   }, [id]); // Include `id` in the dependencies array to refetch when the id changes ???
 
-  if (!postInfo) return "";
+  // Handle loading state
+  if (isLoading) {
+    return (
+      <div class="loading-container">
+        <div class="loader"></div>
+      </div>
+    )
+  }
+
+  // Handle error state
+  if (error) {
+    return <div>Error: {error}</div>; // Display error message
+  }
+
+  // Ensure postInfo is available before proceeding to render the component
+  if (!postInfo) {
+    return <div>Post not found</div>;
+  }
 
   return (
     <div className="post-page">

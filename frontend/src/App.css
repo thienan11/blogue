@@ -327,6 +327,7 @@ div.container p.tag {
   font-size: 2.5rem; /* Large title to catch attention */
   margin-bottom: 0.5rem; /* Adds space below the title */
   color: #5d8aa8;
+  margin-top: 0;
 }
 
 .post-page time {
@@ -413,3 +414,28 @@ div.post-page a svg {
   width: 50px;
   height: 50px;
 } */
+
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: 
+    radial-gradient(farthest-side,#5d8aa8 94%,#0000) top/8px 8px no-repeat,
+    conic-gradient(#0000 30%,#5d8aa8);
+  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
+  mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+  animation: l13 1s infinite linear;
+}
+@keyframes l13{ 
+  100%{transform: rotate(1turn)}
+}
+
+/* Container CSS for centering the loader */
+.loading-container {
+  position: fixed; /* or absolute, depending on use case */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  height: fit-content;
+}
