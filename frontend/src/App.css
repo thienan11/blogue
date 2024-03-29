@@ -81,7 +81,7 @@ header nav {
 div.post {
   display: block; /* Change from grid to block if images are no longer needed */
   margin-bottom: 20px;
-  border-bottom: 1px solid #f3f0f0;
+  border-bottom: 2px solid #f3f0f0;
   padding: 10px 15px;
 }
 
@@ -113,7 +113,7 @@ div.post div.texts p.info {
 
 div.post p.info a.author {
   color: #222;
-  margin-right: 5px;
+  /* margin-left: 5px; */
 }
 
 div.post p.summary {
@@ -127,7 +127,7 @@ div.date-container {
   align-items: center;
 }
 
-div.date-container img {
+div.date-container img.calendar-icon {
   width: 15px;
   height: auto;
   margin-right: 3px;
@@ -408,3 +408,8 @@ div.post-page a.edit-button {
 div.post-page a svg {
   height: 16px;
 }
+
+/* header div.header-container img.logo-icon{
+  width: 50px;
+  height: 50px;
+} */

@@ -29,7 +29,8 @@ app.use(cors(
     origin:'https://bloguetown.vercel.app'
   }));
 
-app.use(express.json());
+// app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
 app.use(cookieParser());
 
 // mongoose.connect('mongodb+srv://blogue:gI1yt6aXrGUfV1a2@cluster0.nxrwv81.mongodb.net/?retryWrites=true&w=majority');

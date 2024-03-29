@@ -1,5 +1,9 @@
-import { format } from "date-fns";
+import { format, utcToZonedTime } from 'date-fns-tz';
 import { Link } from "react-router-dom";
+
+const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+// const userTimeZone = "Asia/Tokyo";
+// const userTimeZone = "America/New_York";
 
 export default function Post({
   _id,
@@ -16,11 +20,13 @@ export default function Post({
         <div className="texts">
           <h2>{title}</h2>
           <p className="info">
-            <a className="author">By: {author.username}</a>
             <div className="date-container">
-              <img src="/icons/calendar.svg"/>
-              <time>{format(new Date(createdAt), "MMM d, yyyy hh:mm a")}</time>
+              <img src="/icons/calendar.svg" className="calendar-icon"/>
+              <time>{format(
+                new Date(utcToZonedTime(createdAt, userTimeZone)), "MMM d, yyyy")}
+              </time>
             </div>
+            <a className="author">By: {author.username}</a>
           </p>
           <p className="summary">{summary}</p>
         </div>
