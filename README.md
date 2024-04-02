@@ -2,7 +2,9 @@
 
 A simple interactive blog site using MongoDB, Express.js, React.js, and Node.js.
 
-It is currently being updated, but check visit it at https://bloguetown.vercel.app/.
+Posts can be viewed without registering/logging in, but to create new posts, you need an account. The application uses JWT for authentication.
+
+It is currently being updated with additional features. Visit it at https://bloguetown.vercel.app/.
 
 ## Installation
 
