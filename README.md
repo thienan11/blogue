@@ -1,6 +1,8 @@
 # bloguetown
 
-A simple interactive blog site using MongoDB, Express.js, React.js, and Node.js. (currently in development)
+A simple interactive blog site using MongoDB, Express.js, React.js, and Node.js.
+
+It is currently being updated, but check visit it at https://bloguetown.vercel.app/.
 
 ## Installation
 
@@ -11,3 +13,15 @@ To install all necessary dependencies, run `yarn` in both frontend and backend d
 To start the backend server, go into the backend directory and run `node index.js` or `nodemon index.js` when developing.
 
 To start the frontend client, go into the frontend directory and run `npm start`.
+
+## TODO
+
+- [ ] Add functionality to reset password (email verification when registering)
+
+- [ ] Add functionality to delete post(s)
+
+- [ ] For each post add ability to like and comment
+
+- [ ] Add post tags, possibly searching functionality?
+
+- [ ] Add way to view profile and settings?
