@@ -101,7 +101,7 @@ export default function LoginPage() {
           />
           <i className={`bi ${passwordType === "password" ? "bi-eye-slash" : "bi-eye"}`} id="togglePassword"></i>
         </p>
-        <Link>Forgot password?</Link>
+        <Link to="/forgotPassword">Forgot password?</Link>
         <button type="submit" id="submit" className="submit">
           Log In
         </button>

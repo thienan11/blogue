@@ -10,6 +10,8 @@ import UserContextProvider from './components/UserContext';
 import CreatePostPage from './pages/CreatePostPage';
 import PostPage from './pages/PostPage';
 import EditPostPage from './pages/EditPostPage';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
 
 function App() {
 
@@ -24,6 +26,10 @@ function App() {
           <Route path={'/login'} element={ <LoginPage/> }/>
 
           <Route path={'/register'} element={ <RegisterPage/> }/>
+
+          <Route path={'/forgotPassword'} element={ <ForgotPasswordPage/> }/>
+
+          <Route path={"/reset-password/:id/:token"} element={<ResetPasswordPage />} />
 
           <Route path={'/create'} element={ <CreatePostPage/> }/>
 
