@@ -217,51 +217,31 @@ app.post("/forgot-password", async (req, res) => {
   }
 });
 
-app.get("/reset-password/:id/:token", async (req, res) => {
-  const { id, token } = req.params;
-  console.log(req.params);
-  const currUser = await User.findOne({ _id: id });
-  if (!currUser) {
-    return res.status(404).json("User does not exist!");
-  }
-  const new_secret = secret + currUser.password;
-  try {
-    const verify = jwt.verify(token, new_secret);
-    res.send("Verified!!");
-    // res.render("resetPassword", {email: verify.email});
-    console.log("verified");
-  } catch (error) {
-    console.log(error);
-    res.send("Not verified");
-  }
-});
-
 app.post("/reset-password/:id/:token", async (req, res) => {
   const { id, token } = req.params;
   const { newPassword } = req.body;
 
-  const currUser = await User.findOne({ _id: id });
-  if (!currUser) {
-    return res.status(404).json("User does not exist!");
+  if (!newPassword) {
+    return res.status(400).json("New password is required.");
   }
-  const new_secret = secret + currUser.password;
+
   try {
-    const verify = jwt.verify(token, new_secret);
+    const currUser = await User.findOne({ _id: id });
+    if (!currUser) {
+      return res.status(404).json("User does not exist!");
+    }
+    const new_secret = secret + currUser.password;
+    
+    // This tries to verify the token. If it fails, it will skip to the catch block.
+    jwt.verify(token, new_secret);
+
     const newEncryptedPassword = await bcrypt.hash(newPassword, salt);
-    await User.updateOne(
-      {
-        _id: id,
-      },
-      {
-        $set: {
-          password: newEncryptedPassword,
-        },
-      }
-    );
-    res.json("Password Updated!");
+    await User.updateOne({ _id: id }, { $set: { password: newEncryptedPassword } });
+    
+    res.json("Password updated successfully.");
   } catch (error) {
     console.log(error);
-    res.status(400).json("Something went wrong while updating password!");
+    res.status(400).json("Invalid or expired token.");
   }
 });
 
